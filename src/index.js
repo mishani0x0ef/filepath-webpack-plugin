@@ -1,4 +1,3 @@
-import { warn, info, error } from "./log-utils";
 import { getPathsLongerThan } from "./path-utils";
 import validateOptions from "schema-utils";
 
@@ -32,10 +31,12 @@ export class FilepathPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.emit.tapPromise(pluginName, (_) => this._checkPathLength());
+    compiler.hooks.emit.tapPromise(pluginName, (compilation) =>
+      this._checkPathLength(compilation)
+    );
   }
 
-  async _checkPathLength() {
+  async _checkPathLength({ errors, warnings }) {
     const { basePath, maxPathLength, level } = this.options;
     const nonCompliantPaths = await getPathsLongerThan(basePath, maxPathLength);
 
@@ -44,20 +45,20 @@ export class FilepathPlugin {
     }
 
     const message =
-      `WARNING: there are ${nonCompliantPaths.length} path(s) have more than ${maxPathLength} symbols.\r\n` +
-      `Please make sure to reduce nesting or make folder and file names shorter:\r\n`;
+      `${pluginName}\r\n` +
+      `${nonCompliantPaths.length} path(s) have more than ${maxPathLength} symbols.\r\n` +
+      `Please make sure to reduce nesting or make folder and file names shorter:\r\n` +
+      JSON.stringify(nonCompliantPaths, null, 2);
 
     switch (level) {
       case "error":
-        error(message);
-        info(nonCompliantPaths);
-        throw new Error(message);
+        errors.push(new Error(message));
+        break;
       case "warn":
-        warn(message);
-        info(nonCompliantPaths);
+        warnings.push(message);
         break;
       default:
-        info(message, nonCompliantPaths);
+        console.info(message);
         break;
     }
   }
