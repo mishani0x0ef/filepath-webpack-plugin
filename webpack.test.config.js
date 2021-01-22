@@ -7,5 +7,5 @@ module.exports = {
     filename: "test.js",
     path: path.resolve(__dirname, "ignore"),
   },
-  plugins: [new FilepathPlugin({ maxPathLength: 50 })],
+  plugins: [new FilepathPlugin({ maxPathLength: 50, level: "warn" })],
 };
