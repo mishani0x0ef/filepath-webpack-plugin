@@ -1,0 +1,7 @@
+ignore/
+node_modules/
+src/
+test/
+package-lock.json
+webpack.config.js
+webpack.test.config.js
