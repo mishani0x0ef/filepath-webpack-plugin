@@ -16,7 +16,7 @@ This is a webpack plugin that checks your source code for long paths. It can be 
 
 ## Usage
 
-The plugin will warn you if any path in your project exceeds the maximum length. Just add the plugin to your `webpack` config as follows:
+The plugin will show a build warning if any path in your project exceeds the maximum length. Just add the plugin to your `webpack` config as follows:
 
 **webpack.config.js**
 
@@ -37,13 +37,12 @@ module.exports = {
 
 You can pass configuration options to `filepath-webpack-plugin`. Allowed values are as follows:
 
-| Name            | Type             | Default  | Description                                                                                                                                     |
-| --------------- | ---------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `basePath`      | `string`         | `'./'`   | Path that identify where analyze should start (relative to application root).                                                                   |
-| `maxPathLength` | `number`         | `200`    | Maximum count of symbols allowed in the relative path. If path length will exceed this value - build will notify you according to `level`.      |
-| `level`         | `'warn','error'` | `'warn'` | Identifies action that should be done if path don't satisfy rules: `warn` - warning that allow build to proceed; `error` - will fail the build. |
+| Name            | Type      | Default | Description                                                                                                                                                                                                          |
+| --------------- | --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `maxPathLength` | `number`  | `200`   | Maximum count of symbols allowed in the module's path. If path length will exceed this value - you will see a warning or an error depending on `failOnError`. Path length calculated relatively to the project root. |
+| `failOnError`   | `boolean` | `false` | Identifies action that should be done if path doesn't satisfy rules: `false` - warning; `true` - will fail the build.                                                                                                  |
 
-Please look at the example that shows how to use options:
+Please take a look at the example of how to use options:
 
 **webpack.config.js**
 
@@ -58,8 +57,8 @@ module.exports = {
   },
   plugins: [
     new FilepathPlugin({
-      maxPathLength: 50,
-      level: "error",
+      maxPathLength: 100,
+      failOnError: true,
     }),
   ],
 };
