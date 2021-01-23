@@ -1,5 +1,5 @@
 const path = require("path");
-const { FilepathPlugin } = require("./index");
+const { FilepathPlugin } = require("../index");
 
 module.exports = {
   entry: "./test/index.js",
@@ -7,5 +7,5 @@ module.exports = {
     filename: "test.js",
     path: path.resolve(__dirname, "ignore"),
   },
-  plugins: [new FilepathPlugin({ maxPathLength: 50, level: "warn" })],
+  plugins: [new FilepathPlugin({ maxPathLength: 50, failOnError: true })],
 };

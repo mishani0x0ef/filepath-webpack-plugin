@@ -4,22 +4,18 @@ import { pathLengthRule } from "./path-length-rule";
 const schema = {
   type: "object",
   properties: {
-    basePath: {
-      type: "string",
-    },
     maxPathLength: {
       type: "number",
     },
-    level: {
-      type: "string",
+    failOnError: {
+      type: "boolean",
     },
   },
 };
 
 const defaults = {
-  basePath: "./",
   maxPathLength: 200,
-  level: "warn",
+  failOnError: false,
 };
 
 const pluginName = "FilepathPlugin";

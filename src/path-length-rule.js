@@ -2,7 +2,7 @@ import { resolve } from "path";
 import { log } from "./log-utils";
 
 export function pathLengthRule(compilation, options) {
-  const { maxPathLength, level, pluginName } = options;
+  const { maxPathLength, failOnError, pluginName } = options;
   const basePath = resolve("./");
 
   const tooLongPaths = compilation.modules
@@ -12,7 +12,10 @@ export function pathLengthRule(compilation, options) {
     .map((module) => module.substring(basePath.length))
     .filter((module) => module.length > maxPathLength)
     .map((module) => module.split("\\").join("/"))
-    .map((module) => `.${module}`);
+    .map((module) => ({
+      path: `.${module}`,
+      length: module.length,
+    }));
 
   if (!tooLongPaths.length > 0) {
     return;
@@ -24,5 +27,5 @@ export function pathLengthRule(compilation, options) {
     `Please make sure to reduce nesting or make folder and file names shorter:\r\n` +
     JSON.stringify(tooLongPaths, null, 2);
 
-  log(level, message, compilation);
+  log(message, compilation, failOnError);
 }
