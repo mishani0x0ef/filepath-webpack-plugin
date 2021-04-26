@@ -21,7 +21,7 @@ The plugin will show a build warning if any path in your project exceeds the max
 **webpack.config.js**
 
 ```js
-const FilepathPlugin = require("filepath-webpack-plugin");
+const { FilepathPlugin } = require("filepath-webpack-plugin");
 
 module.exports = {
   entry: "index.js",
