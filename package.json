@@ -1,6 +1,6 @@
 {
   "name": "filepath-webpack-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple plugin for checking paths length in your project",
   "license": "MIT",
   "author": "Mykhailo Romaniuk (https://github.com/mishani0x0ef)",
