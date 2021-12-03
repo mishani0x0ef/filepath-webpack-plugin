@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/filepath-webpack-plugin.svg)](https://badge.fury.io/js/filepath-webpack-plugin)
+
 # Filepath Webpack Plugin
 
 A simple plugin for checking paths length in your project
@@ -47,7 +49,7 @@ Please take a look at the example of how to use options:
 **webpack.config.js**
 
 ```js
-const FilepathPlugin = require("filepath-webpack-plugin");
+const { FilepathPlugin } = require("filepath-webpack-plugin");
 
 module.exports = {
   entry: "index.js",
@@ -57,7 +59,7 @@ module.exports = {
   },
   plugins: [
     new FilepathPlugin({
-      maxPathLength: 100,
+      maxPathLength: 50,
       failOnError: true,
     }),
   ],
