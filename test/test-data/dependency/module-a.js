@@ -1,3 +1,3 @@
 module.exports = {
-  test: "compliant",
+  name: "module-a",
 };

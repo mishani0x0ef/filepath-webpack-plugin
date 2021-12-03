@@ -1,6 +1,6 @@
 {
   "name": "filepath-webpack-plugin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple plugin for checking paths length in your project",
   "license": "MIT",
   "author": "Mykhailo Romaniuk (https://github.com/mishani0x0ef)",
@@ -10,9 +10,8 @@
   "repository": "https://github.com/mishani0x0ef/filepath-webpack-plugin.git",
   "scripts": {
     "prepublish": "npm run build",
-    "build": "npx webpack --config webpack.config.js --mode production",
-    "build:test": "npx webpack --config test/webpack.config.js --mode production",
-    "test": "npm run build && npm run build:test"
+    "build": "npx webpack --mode production",
+    "test": "npm run build & npx jest"
   },
   "dependencies": {
     "schema-utils": "^1.0.0"
@@ -22,6 +21,7 @@
     "@babel/preset-env": "^7.12.11",
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
+    "jest": "^27.4.3",
     "tslint": "^6.1.3",
     "typescript": "^4.1.3",
     "webpack": "^4.46.0",
