@@ -17,7 +17,7 @@ export function pathLengthRule(compilation, options) {
       length: module.length,
     }));
 
-  if (!tooLongPaths.length > 0) {
+  if (tooLongPaths.length < 1) {
     return;
   }
 
