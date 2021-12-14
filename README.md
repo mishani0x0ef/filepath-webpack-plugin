@@ -8,6 +8,8 @@ A simple plugin for checking paths length in your project.
 
 This is a webpack plugin that checks your source code for long paths. It can be useful for projects that have deep nesting in their structure or have long file/folder names. This plugin will help to warn developers about too long paths before it [caused an issue](https://stackoverflow.com/questions/22575662/filename-too-long-in-git-for-windows/22575737#22575737) on other machines.
 
+> NOTE: for Webpack 4 support use version `< 5.0.0`.
+
 ## Install
 
 ```sh
