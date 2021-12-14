@@ -92,7 +92,9 @@ describe("path-length-rule", () => {
       failOnError: true,
     });
 
-    await expect(runWebpack(options)).rejects.toBeDefined();
+    await expect(runWebpack(options)).rejects.toEqual(
+      expect.stringContaining("ERROR in FilepathPlugin")
+    );
   });
 
   afterAll(() => {
