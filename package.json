@@ -14,7 +14,7 @@
     "test": "npm run build & npx jest"
   },
   "dependencies": {
-    "schema-utils": "^1.0.0"
+    "schema-utils": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

@@ -11,6 +11,7 @@ const schema = {
       type: "boolean",
     },
   },
+  additionalProperties: false,
 };
 
 const defaults = {
@@ -22,7 +23,11 @@ const pluginName = "FilepathPlugin";
 
 export class FilepathPlugin {
   constructor(options) {
-    validateOptions(schema, options, pluginName);
+    validateOptions(schema, options, {
+      name: pluginName,
+      baseDataPath: "options",
+    });
+
     this.options = { ...defaults, ...options, pluginName };
   }
 

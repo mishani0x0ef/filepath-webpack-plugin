@@ -38,6 +38,36 @@ const outputDir = getPath("dist");
 const maxPathLength = "/test/test-data/dependency/module-a.js".length;
 
 describe("path-length-rule", () => {
+  it("WHEN maxPathLength has incorrect data type SHOULD throw validation error", async () => {
+    const options = {
+      maxPathLength: "INVALID-VALUE",
+    };
+
+    expect(() => new FilepathPlugin(options)).toThrowError(
+      "options.maxPathLength should be a number"
+    );
+  });
+
+  it("WHEN failOnError has incorrect data type SHOULD throw validation error", async () => {
+    const options = {
+      failOnError: "INVALID-VALUE",
+    };
+
+    expect(() => new FilepathPlugin(options)).toThrowError(
+      "options.failOnError should be a boolean"
+    );
+  });
+
+  it("WHEN contains extra options SHOULD throw validation error", async () => {
+    const options = {
+      extraOptionThatNotExistsInConfigSchema: "value",
+    };
+
+    expect(() => new FilepathPlugin(options)).toThrowError(
+      "options has an unknown property 'extraOptionThatNotExistsInConfigSchema'"
+    );
+  });
+
   it("WHEN path length is equal maxPathLength SHOULD not indicate error", async () => {
     const options = getWebpackOptions({
       maxPathLength: maxPathLength,
