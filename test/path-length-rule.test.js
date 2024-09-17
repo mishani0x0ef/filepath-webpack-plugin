@@ -15,6 +15,14 @@ function getWebpackOptions(pluginOptions, webpackOptions) {
       path: outputDir,
     },
     mode: "development",
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: ["css-loader"],
+        },
+      ],
+    },
     plugins: [new FilepathPlugin(pluginOptions)],
     ...webpackOptions,
   };
@@ -95,6 +103,20 @@ describe("path-length-rule", () => {
     await expect(runWebpack(options)).rejects.toEqual(
       expect.stringContaining("ERROR in FilepathPlugin")
     );
+  });
+
+  it("WHEN css contains base64 url SHOULD not indicate error", async () => {
+    const options = getWebpackOptions(
+      {
+        maxPathLength: maxPathLength,
+        failOnError: true,
+      },
+      {
+        entry: getPath("./test-data/base64-in-css.js"),
+      }
+    );
+
+    await expect(runWebpack(options)).resolves.toBeDefined();
   });
 
   afterAll(() => {
