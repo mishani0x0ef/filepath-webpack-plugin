@@ -1,6 +1,10 @@
 import { resolve } from "path";
 import { log } from "./log-utils";
 
+function isBase64(path) {
+  return path.startsWith("data:");
+}
+
 export function pathLengthRule(compilation, options) {
   const { maxPathLength, failOnError, pluginName } = options;
   const basePath = resolve("./");
@@ -9,6 +13,7 @@ export function pathLengthRule(compilation, options) {
     .map((module) => module.resource)
     .filter((module) => module)
     .filter((module) => !module.includes("node_modules"))
+    .filter((module) => !isBase64(module))
     .map((module) => module.substring(basePath.length))
     .filter((module) => module.length > maxPathLength)
     .map((module) => module.split("\\").join("/"))
